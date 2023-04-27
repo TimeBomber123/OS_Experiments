@@ -1,0 +1,32 @@
+def bankers(np, nr, avail, Max, allo):
+    need = [[Max[i][j] - allo[i][j] for j in range(nr)] for i in range(np)]
+    safe = []
+    work = avail.copy()
+    finish = [0] * np
+    while len(safe) < np:
+        found = False
+        for i in range(np):
+            if finish[i] == 0 and all(need[i][j] <= work[j] for j in range(nr)):
+                work = [work[j] + allo[i][j] for j in range(nr)]
+                safe.append(i)
+                finish[i] = 1
+                found = True
+                break
+        if not found:
+            print("System is not in safe state")
+            return False
+    print("System is in safe state.")
+    print("Safe sequence is: ", end="")
+    print(*[f"P{p}" for p in safe], sep=" -> ")
+    return True
+np = 5
+nr = 3
+avail = [3, 3, 2]
+Max = [[7, 5, 3], [3, 2, 2], [9, 0, 2], [2, 2, 2], [4, 3, 3]]
+allo = [[0, 1, 0], [2, 0, 0], [3, 0, 2], [2, 1, 1], [0, 0, 2]]
+bankers(np, nr, avail, Max, allo)
+
+Output
+System is in safe state.
+Safe sequence is: P1 -> P3 -> P0 -> P2 -> P4
+True
