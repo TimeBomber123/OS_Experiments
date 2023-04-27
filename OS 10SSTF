@@ -1,19 +1,19 @@
-def sstf(requests, head):
-    differences = []
-    movements = 0
-    while len(requests) > 0:
-        min_ = sorted(requests, key=lambda x: abs(x - head))[0]
-        differences.append(abs(min_ - head))
-        movements += differences[-1]
-        head = min_
-        requests.remove(min_)
-    return differences, movements
-requests = [98, 183, 37, 122, 14, 124, 65, 67]
-head = 53
-diff, mov = sstf(requests, head)
-print("Seek distances:", diff)
-print("Total movements:", mov)
+def sstf():
+    current = int(input("Enter the current position of the disk head: "))
+    requests = list(map(int, input("Enter the list of requests, separated by spaces: ").split()))
+    time = 0
+    while requests:
+        closest = min(requests, key=lambda x: abs(x - current))
+        time += abs(closest - current)
+        current = closest
+        requests.remove(closest)
+    print("Total seek time:", time)
+    
+sstf()
 
 Output
-Seek distances: [12, 2, 30, 23, 84, 24, 2, 59]
-Total movements: 236
+Enter the current position of the disk head: 
+53
+Enter the list of requests, separated by spaces: 
+98 183 37 122 14 124 65 67
+Total seek time: 236
