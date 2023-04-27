@@ -1,0 +1,36 @@
+def least_recent():
+    memory = []
+    size_set = 3
+    add_values = [7,0,1,2,0,3,0,4,2,3,0,3,2,3]
+    hits = 0
+    miss = 0
+    n=0
+    no_change = 0
+    for x in add_values:
+        if len(memory) < size_set:
+            miss+=1
+            memory.append(x)
+        else:
+            if x in memory:
+                hits+=1
+                no_change = x
+            else:
+                index = memory.index(no_change)
+                if index!=n:
+                    memory[n] = x
+                    miss+=1
+                    n=(n+1)%size_set
+                else:
+                    n=(n+1)%size_set
+                    miss+=1
+                    memory[n] = x
+                    n=(n+1)%size_set
+    print("_____________Least_Recent_Replacement___________")
+    print(f"hits :{hits}")
+    print(f"miss :{miss}")
+least_recent()
+
+Output
+_____________Least_Resent_Replacement___________
+hits :6
+miss :8
