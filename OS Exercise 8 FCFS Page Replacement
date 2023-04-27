@@ -1,0 +1,28 @@
+def first_come_first_serve():
+    memory = []
+    size_set = 3
+    add_values = [7,0,1,2,0,3,0,4,2,3,0,3,2,3]
+    hits = 0
+    miss = 0
+    n = 0
+    for x in add_values:
+        if len(memory) < size_set:
+            miss += 1
+            memory.append(x)
+        else:
+            if x in memory:
+                hits += 1
+            else:
+                memory[n] = x
+                miss += 1
+                n = (n + 1) % size_set
+    print("_____________First Come First Replacement___________")
+    print(f"hits: {hits}")
+    print(f"misses: {miss}")
+    
+first_come_first_serve()
+
+Output
+_____________First Come First Replacement___________
+hits: 4
+misses: 10
