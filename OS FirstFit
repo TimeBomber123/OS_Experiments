@@ -1,0 +1,20 @@
+def first_fit(blockSize,processSize):
+    for x in processSize:
+        for y in blockSize:
+            if x<y:
+                print(f"{x} --> {y}")
+                blockSize.remove(y)
+                break
+        else:
+            print(f"{x} --> cannot be placed")
+blockSize= [100, 500, 200, 300, 600]
+Block_no= [1, 2, 3, 4, 5]
+processSize= [212, 417, 112, 426]
+
+first_fit(blockSize,processSize)
+
+Output
+212 --> 500
+417 --> 600
+112 --> 200
+426 --> cannot be placed
