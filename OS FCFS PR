@@ -1,4 +1,4 @@
-def first_come_first_serve():
+def first_in_first_out():
     memory = []
     size_set = 3
     add_values = [7,0,1,2,0,3,0,4,2,3,0,3,2,3]
@@ -16,13 +16,13 @@ def first_come_first_serve():
                 memory[n] = x
                 miss += 1
                 n = (n + 1) % size_set
-    print("_____________First Come First Replacement___________")
+    print("_____________First In First Out___________")
     print(f"hits: {hits}")
     print(f"misses: {miss}")
     
-first_come_first_serve()
+first_in_first_out()
 
 Output
-_____________First Come First Replacement___________
+_____________First In First Out___________
 hits: 4
 misses: 10
