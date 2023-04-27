@@ -1,0 +1,15 @@
+def sstf(requests, head):
+    differences = []
+    movements = 0
+    queue = list(requests)
+    while len(queue) > 0:
+        min_ = sorted(queue, key = lambda x: abs(x - head))[0]
+        differences.append(abs(min_ - head))
+        movements += differences[-1]
+        head = min_
+        queue.remove(min_)
+    return differences, movements
+print("\nPerforming sstf, movements taken are: ")
+diff, mov = sstf(requests, head)
+print("\n".join(str(d) for d in diff))
+print("Total movements taken:", mov)   
