@@ -1,0 +1,31 @@
+def fcfs(requests, head):
+    differences = []
+    movements = 0
+    for req in requests:
+        differences.append(abs(req - head))
+        movements += abs(req - head)
+        head = req
+    return differences, movements
+head = int(input("Enter head value: "))
+requests = [int(req) for req in input("Enter the requests: ").split()]
+print("\nPerforming fcfs, movements taken are: ")
+diff, mov = fcfs(requests, head)
+print("\n".join(str(d) for d in diff))
+print("Total movements taken:", mov)   
+
+
+
+Output
+Enter head value: 53
+Enter the requests: 98 183 122 37 14 124 65 67
+
+Performing fcfs, movements taken are:
+45
+85
+61
+85
+23
+110
+59
+2
+Total movements taken: 470
