@@ -1,20 +1,16 @@
 def fcfs(requests, head):
-    differences = []
-    movements = 0
-    for req in requests:
-        differences.append(abs(req - head))
-        movements += abs(req - head)
-        head = req
-    return differences, movements
+    movements = abs(requests[0] - head)
+    for i in range(1, len(requests)):
+        movements += abs(requests[i] - requests[i-1])
+    return movements
+
 head = int(input("Enter the initial position of the disk head: "))
-requests = [int(req) for req in input("Enter the disk requests (space-separated): ").split()]
+requests = list(map(int, input("Enter the disk requests (space-separated): ").split()))
 if not requests:
     print("Error: Please enter at least one disk request.")
 else:
-    diff, mov = fcfs(requests, head)
-    print("Differences:", ", ".join(str(d) for d in diff))
+    mov = fcfs(requests, head)
     print("Total movements:", mov)
-
 
 Output
 Enter the initial position of the disk head: 50
