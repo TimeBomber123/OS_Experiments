@@ -1,19 +1,22 @@
-def sstf(requests, head):
-    differences = []
+def fcfs(requests, head):
+ differences = []
     movements = 0
-    while len(requests) > 0:
-        min_ = sorted(requests, key=lambda x: abs(x - head))[0]
-        differences.append(abs(min_ - head))
-        movements += differences[-1]
-        head = min_
-        requests.remove(min_)
+    for req in requests:
+        differences.append(abs(req - head))
+        movements += abs(req - head)
+        head = req
     return differences, movements
-requests = [98, 183, 37, 122, 14, 124, 65, 67]
-head = 53
-diff, mov = sstf(requests, head)
-print("Seek distances:", diff)
-print("Total movements:", mov)
+head = int(input("Enter the initial position of the disk head: "))
+requests = [int(req) for req in input("Enter the disk requests (space-separated): ").split()]
+if not requests:
+    print("Error: Please enter at least one disk request.")
+else:
+    diff, mov = fcfs(requests, head)
+    print("Differences:", ", ".join(str(d) for d in diff))
+    print("Total movements:", mov)
 
 Output
-Seek distances: [12, 2, 30, 23, 84, 24, 2, 59]
-Total movements: 236
+Enter the initial position of the disk head: 50
+Enter the disk requests (space-separated): 40 30 20 10
+Differences: 10, 10, 10, 10
+Total movements: 40
