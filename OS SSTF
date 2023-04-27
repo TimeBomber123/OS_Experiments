@@ -1,15 +1,19 @@
 def sstf(requests, head):
     differences = []
     movements = 0
-    queue = list(requests)
-    while len(queue) > 0:
-        min_ = sorted(queue, key = lambda x: abs(x - head))[0]
+    while len(requests) > 0:
+        min_ = sorted(requests, key=lambda x: abs(x - head))[0]
         differences.append(abs(min_ - head))
         movements += differences[-1]
         head = min_
-        queue.remove(min_)
+        requests.remove(min_)
     return differences, movements
-print("\nPerforming sstf, movements taken are: ")
+requests = [98, 183, 37, 122, 14, 124, 65, 67]
+head = 53
 diff, mov = sstf(requests, head)
-print("\n".join(str(d) for d in diff))
-print("Total movements taken:", mov)   
+print("Seek distances:", diff)
+print("Total movements:", mov)
+
+Output
+Seek distances: [12, 2, 30, 23, 84, 24, 2, 59]
+Total movements: 236
