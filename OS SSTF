@@ -1,5 +1,5 @@
 def fcfs(requests, head):
- differences = []
+    differences = []
     movements = 0
     for req in requests:
         differences.append(abs(req - head))
