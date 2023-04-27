@@ -1,0 +1,30 @@
+def optimal_page_replacement():
+    pages = [7,0,1,2,0,3,0,4,2,3,0,3,2,3]
+    frame_size = 3
+    miss = 0
+    hit = 0
+    page_frames = [-1] * frame_size
+    next_use = [222222] * frame_size
+    for i, page in enumerate(pages):
+        if page in page_frames:
+            hit +=1
+            continue
+        if -1 in page_frames:
+            j = page_frames.index(-1)
+            page_frames[j] = page
+            miss+=1
+        else:
+            farthest = max(next_use)
+            j = next_use.index(farthest)
+            page_frames[j] = page
+            next_use[j] = pages[i:].index(page) + i
+            miss += 1
+    print("_____________Optimal_Page_Replacement___________")
+    print(f"hits :{hit}")
+    print(f"miss :{miss}")
+optimal_page_replacement()
+
+Output
+_____________Optimal_Page_Replacement___________
+hits :6
+miss :8
