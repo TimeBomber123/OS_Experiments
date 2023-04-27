@@ -7,14 +7,19 @@ def first_fit(blockSize,processSize):
                 break
         else:
             print(f"{x} --> cannot be placed")
+//If you remove the complete code for Best Fit you will get the answer for First Fit
+def best_fit(blockSize,processSize): 
+    new_pro = sorted(processSize,reverse=True)
+    new_blo = sorted(blockSize,reverse=True)
+    first_fit(new_blo,new_pro)
+
 blockSize= [100, 500, 200, 300, 600]
 Block_no= [1, 2, 3, 4, 5]
 processSize= [212, 417, 112, 426]
-
-first_fit(blockSize,processSize)
+best_fit(blockSize,processSize)
 
 Output
-212 --> 500
-417 --> 600
+426 --> 600
+417 --> 500
+212 --> 300
 112 --> 200
-426 --> cannot be placed
