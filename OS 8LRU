@@ -1,36 +1,30 @@
-def least_recent():
-    memory = []
-    size_set = 3
-    add_values = [7,0,1,2,0,3,0,4,2,3,0,3,2,3]
-    hits = 0
-    miss = 0
-    n=0
-    no_change = 0
-    for x in add_values:
-        if len(memory) < size_set:
-            miss+=1
-            memory.append(x)
+from collections import deque
+def lru(pages, page_size):
+    page_holder = deque(maxlen=page_size)
+    for x in pages:
+        if x not in page_holder:
+            if len(page_holder) == page_size:
+                page_holder.popleft()
+            page_holder.append(x)
+            print("miss", page_holder)
         else:
-            if x in memory:
-                hits+=1
-                no_change = x
-            else:
-                index = memory.index(no_change)
-                if index!=n:
-                    memory[n] = x
-                    miss+=1
-                    n=(n+1)%size_set
-                else:
-                    n=(n+1)%size_set
-                    miss+=1
-                    memory[n] = x
-                    n=(n+1)%size_set
-    print("_____________Least_Recent_Replacement___________")
-    print(f"hits :{hits}")
-    print(f"miss :{miss}")
-least_recent()
+            page_holder.remove(x)
+            page_holder.append(x)
+            print("hit", page_holder)
+
+lru([7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2], 4)
 
 Output
-_____________Least_Resent_Replacement___________
-hits :6
-miss :8
+miss deque([7], maxlen=4)
+miss deque([7, 0], maxlen=4)
+miss deque([7, 0, 1], maxlen=4)
+miss deque([7, 0, 1, 2], maxlen=4)
+hit deque([7, 1, 2, 0], maxlen=4)
+miss deque([1, 2, 0, 3], maxlen=4)
+hit deque([1, 2, 3, 0], maxlen=4)
+miss deque([2, 3, 0, 4], maxlen=4)
+hit deque([3, 0, 4, 2], maxlen=4)
+hit deque([0, 4, 2, 3], maxlen=4)
+hit deque([4, 2, 3, 0], maxlen=4)
+hit deque([4, 2, 0, 3], maxlen=4)
+hit deque([4, 0, 3, 2], maxlen=4)
