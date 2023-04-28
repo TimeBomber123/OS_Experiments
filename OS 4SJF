@@ -1,0 +1,29 @@
+ bt = [int(input(f"BurstTime for process {i}: ")) for i in range(int(input("No. of processes: ")))]
+bt.sort()
+wt = [sum(bt[:i]) for i in range(len(bt))]
+tt = [bt[i] + wt[i] for i in range(len(bt))]
+print(f"WaitingTime: {wt}\n")
+print(f"TurnaroundTime: {tt}\n")
+print(f"AverageWaitingTime: {sum(wt)/len(wt)}\n")
+print(f"AverageTurnaroundTime: {sum(tt)/len(tt)}\n")
+
+Output
+Enter no. of processes: 
+5
+Enter burst time for process 0: 
+4
+Enter burst time for process 1: 
+2
+Enter burst time for process 2: 
+3
+Enter burst time for process 3: 
+5
+Enter burst time for process 4: 
+1
+Waiting Time: [0, 1, 3, 6, 10]
+
+Turnaround Time: [1, 3, 6, 10, 15]
+
+Average Waiting Time: 4.0
+
+Average Turnaround Time: 7.0
